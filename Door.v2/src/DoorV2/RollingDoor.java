@@ -4,8 +4,8 @@ import java.util.Scanner;
 
 public class RollingDoor extends Door{
 	int numberofcoil;
-	public RollingDoor(int id,double height,double width,String color,String material,String handle,int noc) {
-		super(id,height,width,color,material,handle);
+	public RollingDoor(int id,String type,double height,double width,String material,String handle,int noc) {
+		super(id,type,height,width,material,handle);
 		this.numberofcoil=noc;
 	}
 	public RollingDoor() {
@@ -22,22 +22,22 @@ public class RollingDoor extends Door{
 		super.Showinfo();
 		System.out.print(" ;Number of Coil:"+getNOC()+"\n");
 	}
+	public void setType() {
+		this.setType("Folding Door");
+	}
+	public String getType() {
+		return "Rolling Door";
+	}
 	public void input() throws Exception {
 		Scanner sc = new Scanner(System.in);
 		super.input();
 		boolean valid = false;
-		while(!valid) {
-			try {
-				System.out.print("Number of Coil: ");
-				numberofcoil=sc.nextInt();
-				if(numberofcoil<=0) throw new Exception("Error:Number of coil is less than 0");
-				else valid = true;
-			}
-			catch(Exception e){
-				System.out.println(e.getMessage());
+			System.out.print("Number of Coil: ");
+			numberofcoil=sc.nextInt();
+			if(numberofcoil<=0) throw new Exception("Error:Number of coil is less than 0");
+			else valid = true;
 				
-			}
-		}
+		
 		
 	}
 }

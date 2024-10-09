@@ -1,22 +1,26 @@
 package DoorV2;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Door  {
+public class Door implements Serializable {
 	private int id;
+	private String type;
 	private double height;
 	private double width;
-	private String color;
+	
 	private String material;
 	private String handle;
-	public String[] colorpack ={"red","yellow","green","blue","black","white"};
+	
+	
 	public String[] materialpack = {"wood","steel"};
-	public Door(int id,double height,double width,String color,String material,String handle ) {
+	public Door(int id,String type,double height,double width,String material,String handle ) {
 		
 		this.id=id;
+		this.type=type;
 		this.height=height;
 		this.width=width;
-		this.color=color;
+		
 		this.material=material;
 		this.handle=handle;
 	}
@@ -30,9 +34,7 @@ public class Door  {
 	public double getWidth() {
 		return this.width;
 	}
-	public String getColor() {
-		return this.color;
-	}
+	
 	public String getHandle()
 	{
 		return this.handle;
@@ -46,9 +48,7 @@ public class Door  {
 	public void setWidth(double w) {
 		this.width=w;
 	}
-	public void setColor(String c) {
-		this.color=c;
-	}
+	
 	public void setHandle(String ha) {
 		this.handle=ha;
 	}
@@ -56,16 +56,22 @@ public class Door  {
 		return "Door";
 	}
 	public void Showinfo() {
-		System.out.print("ID: "+getId()+" ;Height:"+getHeight()+" ;Width:"+getWidth()+" ;Color:"+getColor()+" ;Handle:"+getHandle()+" Material:"+getMaterial());
+		System.out.print("ID: "+getId()+" ;Type:"+getType()+" ;Height:"+getHeight()+" ;Width:"+getWidth()+" ;Handle:"+getHandle()+" ;"+" Material:"+getMaterial());
 	}
 	public String getMaterial() {
 		return this.material;
 	}
+	public void setType(String type) {
+		this.type=type;
+	}
+	public String getType() {
+		return this.type;
+	};
 	public void input() throws Exception {
 		Scanner sc = new Scanner(System.in);
-		boolean valid = false;
-		while(!valid) {
-			try {
+		
+		
+			
 				System.out.print("ID: ");
 				id = sc.nextInt();
 				System.out.print("Height: ");
@@ -76,8 +82,7 @@ public class Door  {
 				System.out.print("Width: ");
 				width = sc.nextDouble();
 				sc.nextLine();
-				System.out.print("Color: ");
-				color = sc.nextLine();
+				
 				int x;
 				System.out.print("Handle: 1.Smart/2.Keyed ");
 				
@@ -95,19 +100,17 @@ public class Door  {
 				System.out.print("Material: ");
 				material =sc.nextLine();
 				
-				if(height<=0) throw new Exception("Error:Height is less than 0");
+				if(height<=0) {
+					throw new Exception("Error:Height is less than 0");
+					
+				}
+				
 				
 				if(width<=0) throw new Exception("Error:Width is less than 0");
 				
-				boolean colorcheck = false;
-				for(String s: colorpack) {
-					if(color.equals(s)) {
-						colorcheck=true;
-					}
-				}
-				if(colorcheck==false) {
-					throw new Exception("Error:Color not found");
-				}
+				
+				
+				
 				boolean materialcheck = false;
 				for(String s: materialpack) {
 					if(material.equals(s)) {
@@ -117,19 +120,16 @@ public class Door  {
 				if(materialcheck==false) {
 					throw new Exception("Error:Material not found");
 				}
-				else valid=true;
-		}
+				
 		
 		
-			catch (Exception e)
-			{
-				System.out.println(e.getMessage());
-			}
+		
+			
 		
 		}
 	
 	
-	}
+	
 	
 }
 
